@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "oceanic-variety-386313",
+  "private_key_id": "5611c0e63164bd6f3d69e97559d5104829a53951",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDSTkz/k7pt/r2I\nexOOhfqfqLDzNXJMkzkac8Y3qD7TuIB6TnmktZnZfdWX5UZOzU++/udcFbKqPX9D\nBZ6kOOaEoM2bOOUvUdu5zr470AYO4L1p2Bpz/aY9SOZy+EKOfSwxU2Yox0/gmOqe\n+6jNYC+qUOZn23xeCg5+Sj+kTXUQ9Up3MNPng2ZUtwxELaQN2qlU56V3+GM42OFB\nlrLmWIqu5RRePzkHsA8zhS37WWVxWo6fzTlIS1GgGOlss57Ng7JJAJ0GLLzidTib\nHT/DPmnNppa/m/5HBJE+Fgv9KP5AATRTTIa1eIFq35PIYLAgG4HDDzJ+L38g2R90\nCXepj3NbAgMBAAECggEAX8rZqLqF+w9DDrUc6djeGTZR714DY5zVsFZWzcg9YdvS\n7aLsJpmva9E05tzAwykir1lVUezyNjgPzRv0sFHYskW6kX7/aafsITzqCr2M3N8C\neAE+v2GkhJq9mVW6n0Olywv1ZxKuMBwHFoaD05SB8Z6q7Fid1AnZoy23wmOjtKZq\nY0qZzXfZUHNwHz/o081+15sFVJfYehbTWZzD0eL2yS87PmYEd7Lum3hzOpBMn6Kf\n8s/bjoLBw8dK1e+hROBUJm7XuaxpxA/Vu8aJFmQrCQxTIBplHhbT+vjzgbT7crKr\nqsjeJyspz187D8rHhyTefTJEl+nAof7loMGdrNST2QKBgQD1KUDql4hjqntNq6X4\nMTL3bR6+02urEg+cWfgMijx028LyhufrPvLuhr0i9IhwCRoJQrWHs4EskxF1wwEk\n9D4aB34wBYmvgVNSU0bvTzltg+OaKvabQTaRpQfCbk4fKJ/lzqVhG9LuP7leSbDZ\nCa7jg0Bn6FPiBVi2KT8knF5JIwKBgQDbmo2lG871XrRMR22y7BoAFNWkDQOa1fPb\nZb4nUAPyfcHIrGDfDCdkTwWaRajK1m1iavlgB+q1espCIajphtytqtmk+fseFLra\ny/QQmTpEeRI4mmm/uQWZUyWIPLDDVZIXWb1JKeSdmt/MTdp7A6yZ1zpqOfCNE8DN\nL5PIdFf8aQKBgQCmHjDthIYXOnJYW8GXHgcx3o+hr/JZtWA8ij3oiVaTvEEpQr4t\nCbdkZooMAHPerlwlAD2u2LPjdzeyetLwrkrSKleXxHjaIiBKPUFocF8yVNbJJOl6\no8KNB6ztUv6+YDGQbuhil47ifu1k9TvOpKALa2kdvy/vi73jmKk/bnD4zwKBgCCK\nOzje8QC8wryWzPN5NrUSYUHIx+L2lwbIga+zlJIm/kLtAAGs/F1JtEvSzJsZwOWX\nclI/ehDgG/5GnI/V8vcs3MksXYBsk+99zzFycwbYZdHLV6YYFXNNtb8FNzAKivY4\nzup7cavE2iqc0qXtunKlSLua0EEnTydYSG6ohq0ZAoGBAL/KBcyIde008lpJZnzq\n1Lu5n0sLVruqZ5WhaK4VKwSR7WQYusfbmTVPnoFlPqRlmbmbuBh/QjbGnrO66Z8A\n2pRhKaRBQOp74Pn+vgYE0Dck84n65oUU6uHCaH/+WyadprczcDn4c+vOuzCNUkh4\nEy2OiofKv7IdMNq0+SllqEGU\n-----END PRIVATE KEY-----\n",
+  "client_email": "big-query-access@oceanic-variety-386313.iam.gserviceaccount.com",
+  "client_id": "102672339486245189379",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/big-query-access%40oceanic-variety-386313.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
