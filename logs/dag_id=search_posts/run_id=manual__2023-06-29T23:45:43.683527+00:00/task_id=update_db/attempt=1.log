@@ -1,0 +1,35 @@
+[2023-06-29T23:48:36.480+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: search_posts.update_db manual__2023-06-29T23:45:43.683527+00:00 [queued]>
+[2023-06-29T23:48:36.513+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: search_posts.update_db manual__2023-06-29T23:45:43.683527+00:00 [queued]>
+[2023-06-29T23:48:36.515+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-29T23:48:36.563+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): update_db> on 2023-06-29 23:45:43.683527+00:00
+[2023-06-29T23:48:36.592+0000] {standard_task_runner.py:57} INFO - Started process 3261 to run task
+[2023-06-29T23:48:36.637+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'search_posts', 'update_db', 'manual__2023-06-29T23:45:43.683527+00:00', '--job-id', '130', '--raw', '--subdir', 'DAGS_FOLDER/search_posts.py', '--cfg-path', '/tmp/tmpca6ew8hg']
+[2023-06-29T23:48:36.650+0000] {standard_task_runner.py:85} INFO - Job 130: Subtask update_db
+[2023-06-29T23:48:36.798+0000] {task_command.py:410} INFO - Running <TaskInstance: search_posts.update_db manual__2023-06-29T23:45:43.683527+00:00 [running]> on host 414be138234a
+[2023-06-29T23:48:36.970+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='search_posts' AIRFLOW_CTX_TASK_ID='update_db' AIRFLOW_CTX_EXECUTION_DATE='2023-06-29T23:45:43.683527+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-29T23:45:43.683527+00:00'
+[2023-06-29T23:48:37.216+0000] {logging_mixin.py:149} INFO - 
+    fresh_data.shape: (4177, 16)
+    old_data.shape: (4057, 1)
+    update_data.shape: (3170, 16)
+    
+[2023-06-29T23:48:37.285+0000] {logging_mixin.py:149} INFO -                     created   created_utc  ... search_term                topic
+0 2023-06-24 19:20:46-05:00  1.687652e+09  ...     alcohol  alcoholic_beverages
+1 2023-06-06 10:58:50-05:00  1.686067e+09  ...     alcohol  alcoholic_beverages
+2 2023-05-23 09:16:55-05:00  1.684851e+09  ...     alcohol  alcoholic_beverages
+3 2023-06-17 18:15:42-05:00  1.687044e+09  ...     alcohol  alcoholic_beverages
+5 2023-06-22 12:26:09-05:00  1.687455e+09  ...     alcohol  alcoholic_beverages
+
+[5 rows x 16 columns]
+[2023-06-29T23:48:37.287+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/search_posts.py", line 70, in update_db
+    for i, row in df_ids.iterrows():
+NameError: name 'df_ids' is not defined
+[2023-06-29T23:48:37.309+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=search_posts, task_id=update_db, execution_date=20230629T234543, start_date=20230629T234836, end_date=20230629T234837
+[2023-06-29T23:48:37.336+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 130 for task update_db (name 'df_ids' is not defined; 3261)
+[2023-06-29T23:48:37.397+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-29T23:48:37.437+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

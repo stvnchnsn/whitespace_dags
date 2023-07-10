@@ -1,0 +1,62 @@
+[2023-06-26T02:37:45.816+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:37:33.899502+00:00 [queued]>
+[2023-06-26T02:37:45.867+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:37:33.899502+00:00 [queued]>
+[2023-06-26T02:37:45.869+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-26T02:37:45.935+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): get_seed_data> on 2023-06-26 02:37:33.899502+00:00
+[2023-06-26T02:37:45.976+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_dag_copy', 'get_seed_data', 'manual__2023-06-26T02:37:33.899502+00:00', '--job-id', '57', '--raw', '--subdir', 'DAGS_FOLDER/my_dag copy.py', '--cfg-path', '/tmp/tmpp7iyl535']
+[2023-06-26T02:37:45.983+0000] {standard_task_runner.py:85} INFO - Job 57: Subtask get_seed_data
+[2023-06-26T02:37:45.979+0000] {standard_task_runner.py:57} INFO - Started process 510 to run task
+[2023-06-26T02:37:46.135+0000] {task_command.py:410} INFO - Running <TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:37:33.899502+00:00 [running]> on host 414be138234a
+[2023-06-26T02:37:46.519+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_copy' AIRFLOW_CTX_TASK_ID='get_seed_data' AIRFLOW_CTX_EXECUTION_DATE='2023-06-26T02:37:33.899502+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-26T02:37:33.899502+00:00'
+[2023-06-26T02:37:46.538+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-06-26T02:37:46.541+0000] {logging_mixin.py:149} INFO - from inside big_query_access.py
+[2023-06-26T02:37:46.549+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-06-26T02:37:50.627+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/grpc_helpers.py", line 72, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/grpc/_channel.py", line 1030, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/airflow/.local/lib/python3.7/site-packages/grpc/_channel.py", line 910, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.PERMISSION_DENIED
+	details = "request failed: the user does not have 'bigquery.readsessions.create' permission for 'projects/oceanic-variety-386313'"
+	debug_error_string = "UNKNOWN:Error received from peer ipv4:172.217.0.170:443 {created_time:"2023-06-26T02:37:50.589671712+00:00", grpc_status:7, grpc_message:"request failed: the user does not have \'bigquery.readsessions.create\' permission for \'projects/oceanic-variety-386313\'"}"
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/my_dag copy.py", line 18, in get_seed_df
+    df = get_big_query(query)
+  File "/opt/airflow/dags/lib/big_query_access.py", line 13, in get_big_query
+    return results.to_dataframe()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/table.py", line 2158, in to_dataframe
+    create_bqstorage_client=create_bqstorage_client,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/table.py", line 1826, in to_arrow
+    bqstorage_client=bqstorage_client
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/table.py", line 1688, in _to_page_iterable
+    yield from result_pages
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/_pandas_helpers.py", line 888, in _download_table_bqstorage
+    max_stream_count=requested_streams,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery_storage_v1/services/big_query_read/client.py", line 639, in create_read_session
+    metadata=metadata,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/gapic_v1/method.py", line 113, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/retry.py", line 354, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/retry.py", line 191, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/grpc_helpers.py", line 74, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.PermissionDenied: 403 request failed: the user does not have 'bigquery.readsessions.create' permission for 'projects/oceanic-variety-386313'
+[2023-06-26T02:37:50.798+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=my_dag_copy, task_id=get_seed_data, execution_date=20230626T023733, start_date=20230626T023745, end_date=20230626T023750
+[2023-06-26T02:37:51.107+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 57 for task get_seed_data (403 request failed: the user does not have 'bigquery.readsessions.create' permission for 'projects/oceanic-variety-386313'; 510)
+[2023-06-26T02:37:51.443+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-26T02:37:51.613+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

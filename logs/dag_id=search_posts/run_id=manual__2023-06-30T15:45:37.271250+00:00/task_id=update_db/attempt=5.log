@@ -1,0 +1,53 @@
+[2023-06-30T15:53:17.008+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: search_posts.update_db manual__2023-06-30T15:45:37.271250+00:00 [queued]>
+[2023-06-30T15:53:17.032+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: search_posts.update_db manual__2023-06-30T15:45:37.271250+00:00 [queued]>
+[2023-06-30T15:53:17.034+0000] {taskinstance.py:1308} INFO - Starting attempt 5 of 5
+[2023-06-30T15:53:17.064+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): update_db> on 2023-06-30 15:45:37.271250+00:00
+[2023-06-30T15:53:17.075+0000] {standard_task_runner.py:57} INFO - Started process 18355 to run task
+[2023-06-30T15:53:17.084+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'search_posts', 'update_db', 'manual__2023-06-30T15:45:37.271250+00:00', '--job-id', '158', '--raw', '--subdir', 'DAGS_FOLDER/search_posts.py', '--cfg-path', '/tmp/tmp4_lt00ll']
+[2023-06-30T15:53:17.089+0000] {standard_task_runner.py:85} INFO - Job 158: Subtask update_db
+[2023-06-30T15:53:17.182+0000] {task_command.py:410} INFO - Running <TaskInstance: search_posts.update_db manual__2023-06-30T15:45:37.271250+00:00 [running]> on host 414be138234a
+[2023-06-30T15:53:17.344+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='search_posts' AIRFLOW_CTX_TASK_ID='update_db' AIRFLOW_CTX_EXECUTION_DATE='2023-06-30T15:45:37.271250+00:00' AIRFLOW_CTX_TRY_NUMBER='5' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-30T15:45:37.271250+00:00'
+[2023-06-30T15:53:17.563+0000] {warnings.py:110} WARNING - /opt/***/dags/search_posts.py:62: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  update_data['created'] = pd.to_datetime(update_data['created'] )
+
+[2023-06-30T15:53:17.566+0000] {logging_mixin.py:149} INFO - 
+    fresh_data.shape: (4177, 16)
+    old_data.shape: (7204, 1)
+    update_data.shape: (10, 16)
+    
+[2023-06-30T15:53:17.606+0000] {logging_mixin.py:149} INFO -                        created   created_utc  ... search_term                topic
+448  2023-06-30 03:16:12-05:00  1.688113e+09  ...      drinks  alcoholic_beverages
+985  2023-06-29 12:09:16-05:00  1.688059e+09  ...        beer  alcoholic_beverages
+1222 2023-06-29 15:01:37-05:00  1.688069e+09  ...        wine  alcoholic_beverages
+1231 2023-06-29 22:33:47-05:00  1.688096e+09  ...        wine  alcoholic_beverages
+1625 2023-06-30 07:54:37-05:00  1.688130e+09  ...     spirits  alcoholic_beverages
+
+[5 rows x 16 columns]
+[2023-06-30T15:53:17.615+0000] {warnings.py:110} WARNING - /opt/***/dags/search_posts.py:74: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  raw_reddit_pulls['created'] = pd.to_datetime(raw_reddit_pulls['created']).dt.strftime("%Y-%m-%d %H:%M:%S")
+
+[2023-06-30T15:53:17.686+0000] {logging_mixin.py:149} INFO - executing BigQuery: 
+        INSERT INTO reddit_db.raw_reddit_pulls (id, created, subreddit, subreddit_id, selftext, author_fullname, title, name, url)
+        VALUES ('14mudc8', '2023-06-30 03:16:12', 'Asmongold', 't5_2y1rb', '', 't2_a6b8pe0w', 'Good thing our boy only drinks sugary sodas', 't3_14mudc8', 'https://i.redd.it/iawfqvhb649b1.png'), ('14mahy1', '2023-06-29 12:09:16', 'CraftBeer', 't5_2rmyr', "I work at a beer distributor/bottle shop and some of our four packs are upwards of $25-30. As much as I enjoy splurging on Other Half, Lawson's, Toppling Goliath etc. every so often, it's not something I can justify regularly.\n\nLately I've been making an effort to try some more affordable local beers and thought I'd ask here for some of y'all's favorites. In my area (Central PA) there's some great options that don't break the bank. Here's some that standout as great value for money.\n\nNew Trail Crisp Lager: A tasty classic lager. We sell 15pks for around $18.\n\nWorkhorse NE IPA: Not anything super special, but great price at around $6 for a 4pk.\n\nNarragansett Lemonade Shandy: Delicious summer beer, around $11 for a 6pk of 16oz cans.\n\nPour Man's: Local micro brewery, their whole lineup is affordable and I haven't had a bad beer from them. Usually around $9-$12 for 4 16oz cans.\n\nHonorable mention to Genesee's seasonal beers. Their Grapefruit and Pineapple Kolch are both delicious and under $10 for a 12 pack. \n\nWould love to hear everyone's thoughts on this, cheers!", 't2_17882z', 'What are some of your favorite affordable craft beers?', 't3_14mahy1', 'https://www.reddit.com/r/CraftBeer/comments/14mahy1/what_are_some_of_your_favorite_affordable_craft/'), ('14meut8', '2023-06-29 15:01:37', 'gaybrosgonemild', 't5_2trla', '', 't2_c64sp1iq', 'Had an amazing trip to wine country last month. What’s your favorite wine? I’m in my pinot noir era', 't3_14meut8', 'https://i.redd.it/ohvxijbij09b1.jpg'), ('14mp6au', '2023-06-29 22:33:47', 'trashy', 't5_2uao3', '', 't2_12qfsy', 'Wine-o mommy strikes again', 't3_14mp6au', 'https://i.redd.it/3w98ggi6s29b1.jpg'), ('14mzmwu', '2023-06-30 07:54:37', 'AskOuija', 't5_3eg3f', '', 't2_fprcwqz', 'Spirits, can you do a Spanish accent?', 't3_14mzmwu', 'https://www.reddit.com/r/AskOuija/comments/14mzmwu/spirits_can_you_do_a_spanish_accent/'), ('14254g4', '2023-06-06 00:36:34', 'TheSimpsons', 't5_2rhs5', '', 't2_4levf0pw', "Here's some Bushmills whiskey served in a potato, floating in a Guinness stout!", 't3_14254g4', 'https://i.redd.it/w60t3a6g3c4b1.jpg'), ('14dve4q', '2023-06-19 19:13:46', 'food', 't5_2qh55', '', 't2_z7qc0', 'homemade triple umami vodka pasta!', 't3_14dve4q', 'https://i.redd.it/6dxn3lqdf27b1.jpg'), ('13jtce3', '2023-05-17 01:13:46', 'gravityfalls', 't5_2udb8', '', 't2_6gduftwk', 'Conventional Television Wisdom from Grunkle Stan, by gin-juice-tonic (swipe for bonus)', 't3_13jtce3', 'https://gin-juice-tonic.tumblr.com/post/717523717835587584/and-also-youre-too-young-for-her-but-you-just'), ('14mvd52', '2023-06-30 04:15:13', 'Earwolf', 't5_2se24', '', 't2_14fo9jue', 'The Sloppy Boys - 141: Rum Runner', 't3_14mvd52', 'https://shows.acast.com/thesloppyboys/episodes/141-rum-runner'), ('14flfn7', '2023-06-21 17:24:03', 'Mixology', 't5_2rb79', '', 't2_apr1ewuh6', 'Made a frostbite but the tequila flavor is too strong. Recommendations for better ratios?', 't3_14flfn7', 'https://www.reddit.com/gallery/14flfn7')
+        
+[2023-06-30T15:53:21.555+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/search_posts.py", line 87, in update_db
+    post_exposures['measurement_date'] = dt.datetime.now().strftime("%Y%m%d%H%M").astype(int)
+AttributeError: 'str' object has no attribute 'astype'
+[2023-06-30T15:53:21.582+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=search_posts, task_id=update_db, execution_date=20230630T154537, start_date=20230630T155317, end_date=20230630T155321
+[2023-06-30T15:53:21.615+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 158 for task update_db ('str' object has no attribute 'astype'; 18355)
+[2023-06-30T15:53:21.700+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-30T15:53:21.751+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

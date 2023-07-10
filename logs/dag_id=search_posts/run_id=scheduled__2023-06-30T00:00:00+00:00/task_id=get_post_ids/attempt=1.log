@@ -1,0 +1,36 @@
+[2023-07-01T00:03:20.666+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: search_posts.get_post_ids scheduled__2023-06-30T00:00:00+00:00 [queued]>
+[2023-07-01T00:03:20.690+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: search_posts.get_post_ids scheduled__2023-06-30T00:00:00+00:00 [queued]>
+[2023-07-01T00:03:20.691+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-07-01T00:03:20.720+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): get_post_ids> on 2023-06-30 00:00:00+00:00
+[2023-07-01T00:03:20.735+0000] {standard_task_runner.py:57} INFO - Started process 26469 to run task
+[2023-07-01T00:03:20.745+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'search_posts', 'get_post_ids', 'scheduled__2023-06-30T00:00:00+00:00', '--job-id', '171', '--raw', '--subdir', 'DAGS_FOLDER/search_posts.py', '--cfg-path', '/tmp/tmpq06jqcqn']
+[2023-07-01T00:03:20.751+0000] {standard_task_runner.py:85} INFO - Job 171: Subtask get_post_ids
+[2023-07-01T00:03:20.923+0000] {task_command.py:410} INFO - Running <TaskInstance: search_posts.get_post_ids scheduled__2023-06-30T00:00:00+00:00 [running]> on host 414be138234a
+[2023-07-01T00:03:21.396+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='search_posts' AIRFLOW_CTX_TASK_ID='get_post_ids' AIRFLOW_CTX_EXECUTION_DATE='2023-06-30T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-06-30T00:00:00+00:00'
+[2023-07-01T00:03:21.400+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-07-01T00:03:21.545+0000] {logging_mixin.py:149} INFO - executing BigQuery: 
+            SELECT name
+            FROM reddit_db.raw_reddit_pulls
+[2023-07-01T00:03:28.017+0000] {logging_mixin.py:149} INFO -          name
+0  t3_13vvmjv
+1  t3_14ewre8
+2  t3_13zl9lf
+3  t3_13ij6r9
+4  t3_14ljiye
+[2023-07-01T00:03:28.019+0000] {python.py:183} INFO - Done. Returned value was:             name
+0     t3_13vvmjv
+1     t3_14ewre8
+2     t3_13zl9lf
+3     t3_13ij6r9
+4     t3_14ljiye
+...          ...
+7279  t3_13jtce3
+7280  t3_14flfn7
+7281  t3_14254g4
+7282  t3_14mp6au
+7283  t3_14mahy1
+
+[7284 rows x 1 columns]
+[2023-07-01T00:03:28.122+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=search_posts, task_id=get_post_ids, execution_date=20230630T000000, start_date=20230701T000320, end_date=20230701T000328
+[2023-07-01T00:03:28.205+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2023-07-01T00:03:28.255+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

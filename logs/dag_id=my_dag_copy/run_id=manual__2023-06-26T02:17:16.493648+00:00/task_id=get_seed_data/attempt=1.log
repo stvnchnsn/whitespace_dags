@@ -1,0 +1,31 @@
+[2023-06-26T02:17:34.356+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:17:16.493648+00:00 [queued]>
+[2023-06-26T02:17:34.561+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:17:16.493648+00:00 [queued]>
+[2023-06-26T02:17:34.570+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-26T02:17:34.826+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): get_seed_data> on 2023-06-26 02:17:16.493648+00:00
+[2023-06-26T02:17:34.913+0000] {standard_task_runner.py:57} INFO - Started process 213 to run task
+[2023-06-26T02:17:35.077+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_dag_copy', 'get_seed_data', 'manual__2023-06-26T02:17:16.493648+00:00', '--job-id', '56', '--raw', '--subdir', 'DAGS_FOLDER/my_dag copy.py', '--cfg-path', '/tmp/tmp6q2_l9z0']
+[2023-06-26T02:17:35.121+0000] {standard_task_runner.py:85} INFO - Job 56: Subtask get_seed_data
+[2023-06-26T02:17:35.992+0000] {task_command.py:410} INFO - Running <TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:17:16.493648+00:00 [running]> on host 414be138234a
+[2023-06-26T02:17:37.714+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_copy' AIRFLOW_CTX_TASK_ID='get_seed_data' AIRFLOW_CTX_EXECUTION_DATE='2023-06-26T02:17:16.493648+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-26T02:17:16.493648+00:00'
+[2023-06-26T02:17:37.725+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-06-26T02:17:37.733+0000] {logging_mixin.py:149} INFO - from inside big_query_access.py
+[2023-06-26T02:17:37.738+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-06-26T02:17:37.745+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/my_dag copy.py", line 18, in get_seed_df
+    df = get_big_query(query)
+  File "/opt/airflow/dags/lib/big_query_access.py", line 9, in get_big_query
+    credentials = service_account.Credentials.from_service_account_file(credientials_path)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/oauth2/service_account.py", line 257, in from_service_account_file
+    filename, require=["client_email", "token_uri"]
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/auth/_service_account_info.py", line 80, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/stevenhansen/GitHub/airflow-docker2/credentials/oceanic-variety-386313-5611c0e63164.json'
+[2023-06-26T02:17:38.061+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=my_dag_copy, task_id=get_seed_data, execution_date=20230626T021716, start_date=20230626T021734, end_date=20230626T021737
+[2023-06-26T02:17:38.480+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 56 for task get_seed_data ([Errno 2] No such file or directory: '/Users/stevenhansen/GitHub/airflow-docker2/credentials/oceanic-variety-386313-5611c0e63164.json'; 213)
+[2023-06-26T02:17:38.633+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-26T02:17:39.312+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,24 @@
+[2023-06-26T02:42:27.918+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:42:19.106666+00:00 [queued]>
+[2023-06-26T02:42:28.099+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:42:19.106666+00:00 [queued]>
+[2023-06-26T02:42:28.105+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-26T02:42:28.205+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): get_seed_data> on 2023-06-26 02:42:19.106666+00:00
+[2023-06-26T02:42:28.241+0000] {standard_task_runner.py:57} INFO - Started process 583 to run task
+[2023-06-26T02:42:28.291+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_dag_copy', 'get_seed_data', 'manual__2023-06-26T02:42:19.106666+00:00', '--job-id', '58', '--raw', '--subdir', 'DAGS_FOLDER/my_dag copy.py', '--cfg-path', '/tmp/tmprspyv8j3']
+[2023-06-26T02:42:28.330+0000] {standard_task_runner.py:85} INFO - Job 58: Subtask get_seed_data
+[2023-06-26T02:42:29.558+0000] {task_command.py:410} INFO - Running <TaskInstance: my_dag_copy.get_seed_data manual__2023-06-26T02:42:19.106666+00:00 [running]> on host 414be138234a
+[2023-06-26T02:42:30.697+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_copy' AIRFLOW_CTX_TASK_ID='get_seed_data' AIRFLOW_CTX_EXECUTION_DATE='2023-06-26T02:42:19.106666+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-26T02:42:19.106666+00:00'
+[2023-06-26T02:42:30.704+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-06-26T02:42:30.706+0000] {logging_mixin.py:149} INFO - from inside big_query_access.py
+[2023-06-26T02:42:30.709+0000] {logging_mixin.py:149} INFO - ['logs', 'dags', '***-worker.pid', 'webserver_config.py', 'plugins', '***.cfg', 'config']
+[2023-06-26T02:42:33.410+0000] {logging_mixin.py:149} INFO -         id  ...                                                url
+0  132urnj  ...  https://www.reddit.com/r/math/comments/132urnj...
+1  12ysjlo  ...  https://www.reddit.com/r/linux/comments/12ysjl...
+2   133skw  ...  https://www.reddit.com/r/AskReddit/comments/13...
+3   fcalx2  ...  https://www.reddit.com/r/Music/comments/fcalx2...
+4  1330lvj  ...  https://www.reddit.com/r/atheism/comments/1330...
+
+[5 rows x 9 columns]
+[2023-06-26T02:42:33.422+0000] {python.py:183} INFO - Done. Returned value was: None
+[2023-06-26T02:42:33.455+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=my_dag_copy, task_id=get_seed_data, execution_date=20230626T024219, start_date=20230626T024227, end_date=20230626T024233
+[2023-06-26T02:42:33.562+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2023-06-26T02:42:33.650+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

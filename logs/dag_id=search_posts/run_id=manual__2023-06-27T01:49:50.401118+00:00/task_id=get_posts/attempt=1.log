@@ -1,0 +1,24 @@
+[2023-06-27T01:49:57.844+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: search_posts.get_posts manual__2023-06-27T01:49:50.401118+00:00 [queued]>
+[2023-06-27T01:49:57.916+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: search_posts.get_posts manual__2023-06-27T01:49:50.401118+00:00 [queued]>
+[2023-06-27T01:49:57.920+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-27T01:49:58.027+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): get_posts> on 2023-06-27 01:49:50.401118+00:00
+[2023-06-27T01:49:58.153+0000] {standard_task_runner.py:57} INFO - Started process 280 to run task
+[2023-06-27T01:49:58.224+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'search_posts', 'get_posts', 'manual__2023-06-27T01:49:50.401118+00:00', '--job-id', '72', '--raw', '--subdir', 'DAGS_FOLDER/search_posts.py', '--cfg-path', '/tmp/tmpb4vgakb9']
+[2023-06-27T01:49:58.240+0000] {standard_task_runner.py:85} INFO - Job 72: Subtask get_posts
+[2023-06-27T01:49:58.629+0000] {task_command.py:410} INFO - Running <TaskInstance: search_posts.get_posts manual__2023-06-27T01:49:50.401118+00:00 [running]> on host 414be138234a
+[2023-06-27T01:49:59.398+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='search_posts' AIRFLOW_CTX_TASK_ID='get_posts' AIRFLOW_CTX_EXECUTION_DATE='2023-06-27T01:49:50.401118+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-27T01:49:50.401118+00:00'
+[2023-06-27T01:50:00.706+0000] {logging_mixin.py:149} INFO - <Response [200]>
+[2023-06-27T01:50:00.723+0000] {logging_mixin.py:149} INFO - searching tests...
+[2023-06-27T01:50:12.752+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/search_posts.py", line 36, in get_posts
+    raw_reddit_posts = pd.concat([results_df, df])
+NameError: name 'df' is not defined
+[2023-06-27T01:50:12.884+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=search_posts, task_id=get_posts, execution_date=20230627T014950, start_date=20230627T014957, end_date=20230627T015012
+[2023-06-27T01:50:12.988+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 72 for task get_posts (name 'df' is not defined; 280)
+[2023-06-27T01:50:13.055+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-27T01:50:13.172+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

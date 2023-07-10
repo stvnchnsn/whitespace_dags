@@ -1,0 +1,61 @@
+[2023-06-29T23:55:16.332+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: search_posts.update_db manual__2023-06-29T23:45:43.683527+00:00 [queued]>
+[2023-06-29T23:55:16.350+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: search_posts.update_db manual__2023-06-29T23:45:43.683527+00:00 [queued]>
+[2023-06-29T23:55:16.352+0000] {taskinstance.py:1308} INFO - Starting attempt 4 of 4
+[2023-06-29T23:55:16.386+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): update_db> on 2023-06-29 23:45:43.683527+00:00
+[2023-06-29T23:55:16.395+0000] {standard_task_runner.py:57} INFO - Started process 3395 to run task
+[2023-06-29T23:55:16.410+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'search_posts', 'update_db', 'manual__2023-06-29T23:45:43.683527+00:00', '--job-id', '133', '--raw', '--subdir', 'DAGS_FOLDER/search_posts.py', '--cfg-path', '/tmp/tmpeamjltuv']
+[2023-06-29T23:55:16.418+0000] {standard_task_runner.py:85} INFO - Job 133: Subtask update_db
+[2023-06-29T23:55:16.536+0000] {task_command.py:410} INFO - Running <TaskInstance: search_posts.update_db manual__2023-06-29T23:45:43.683527+00:00 [running]> on host 414be138234a
+[2023-06-29T23:55:16.807+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='search_posts' AIRFLOW_CTX_TASK_ID='update_db' AIRFLOW_CTX_EXECUTION_DATE='2023-06-29T23:45:43.683527+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-06-29T23:45:43.683527+00:00'
+[2023-06-29T23:55:17.035+0000] {logging_mixin.py:149} INFO - 
+    fresh_data.shape: (4177, 16)
+    old_data.shape: (4057, 1)
+    update_data.shape: (3170, 16)
+    
+[2023-06-29T23:55:17.079+0000] {logging_mixin.py:149} INFO -                     created   created_utc  ... search_term                topic
+0 2023-06-24 19:20:46-05:00  1.687652e+09  ...     alcohol  alcoholic_beverages
+1 2023-06-06 10:58:50-05:00  1.686067e+09  ...     alcohol  alcoholic_beverages
+2 2023-05-23 09:16:55-05:00  1.684851e+09  ...     alcohol  alcoholic_beverages
+3 2023-06-17 18:15:42-05:00  1.687044e+09  ...     alcohol  alcoholic_beverages
+5 2023-06-22 12:26:09-05:00  1.687455e+09  ...     alcohol  alcoholic_beverages
+
+[5 rows x 16 columns]
+[2023-06-29T23:55:17.198+0000] {logging_mixin.py:149} INFO - executing BigQuery: 
+        INSERT INTO reddit_db.raw_reddit_pulls (id, created, subreddit, subreddit_id, selftext, author_fullname, title, name, url)
+        VALUES (Timestamp('2023-06-24 19:20:46-0500', tz='America/Chicago'), 1687652446.0, 'AmItheAsshole', 't5_2xhvq', "One of my (M35) best friends (M34) got married last week.\xa0 He drinks alcohol and our friend group will meet up at breweries a few times a month to hang out.\xa0 His fiance, now wife, does not drink.\xa0 Its never been a part of her life.\xa0\xa0\n\n  \nMy wife and I got a hotel room by the reception space and ubered to the wedding. The ceremony\xa0occurs, we go to whats supposed to be cocktail hour and there was just soda and water.\xa0 No alcohol.\xa0 This was not something we knew about ahead of time.\xa0 There was a palpable buzz among our friend group at the lack of booze.\xa0 A lot of us had spent money on a hotel room and ubering anticipating drinking.\xa0 I'm kind of pissed.\n\n  \n Bride and Groom come to cocktail hour, everyone cheers, and when the bride and groom come mingle with us I ask where is the booze?\xa0 His new wife chimes in saying her family does not drink and they were paying for the wedding, thus no alcohol. I tell them we should know that ahead of time.\xa0 I say i wasted money on a hotel room and ubering.\xa0 I would have just driven if i'd known or maybe not even had come.\xa0 The bride does not take my commentary well and implies I might have a drinking problem (I don't, I only drink with my friends).\xa0 The groom says I don't need to be such an asshole.\xa0 I reiterate that I spent a bunch of money on something I didn't need, we all did.\xa0 The brides pissed at me and asks me to leave.\xa0\xa0\n\n  \nMy wife andI leave, but its clear I touched a nerve.\xa0 In our group chat, friends were mixed on me saying something.\xa0 My wife said I wasn't wrong, but my timing was wrong.\xa0 So was i the asshole?\xa0\xa0", 't2_e43ib5vzf', 'AITA for being pissed there was no Alcohol at a wedding', 't3_14i7ycb', '14i7ycb', 'NoAlcWedding12345', 6385, 'https://www.reddit.com/r/AmItheAsshole/comments/14i7ycb/aita_for_being_pissed_there_was_no_alcohol_at_a/', 0.75, 17443, 'alcohol', 'alcoholic_beverages')
+        
+[2023-06-29T23:55:20.466+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/search_posts.py", line 77, in update_db
+    _ = get_big_query(query)
+  File "/opt/airflow/dags/lib/big_query_access.py", line 16, in get_big_query
+    results = query_job.result()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/query.py", line 1520, in result
+    do_get_result()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/retry.py", line 354, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/retry.py", line 191, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/query.py", line 1510, in do_get_result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/base.py", line 911, in result
+    return super(_AsyncJob, self).result(timeout=timeout, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/future/polling.py", line 261, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Inserted row has wrong column count; Has 16, expected 9 at [3:16]
+
+Location: US
+Job ID: 52096b3b-689f-477a-b149-7331fef0acb1
+
+[2023-06-29T23:55:20.495+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=search_posts, task_id=update_db, execution_date=20230629T234543, start_date=20230629T235516, end_date=20230629T235520
+[2023-06-29T23:55:20.518+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 133 for task update_db (400 Inserted row has wrong column count; Has 16, expected 9 at [3:16]
+
+Location: US
+Job ID: 52096b3b-689f-477a-b149-7331fef0acb1
+; 3395)
+[2023-06-29T23:55:20.574+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-29T23:55:20.619+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

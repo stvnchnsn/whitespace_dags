@@ -1,0 +1,24 @@
+[2023-06-25T02:22:05.741+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag.choose_best_model scheduled__2023-06-24T00:00:00+00:00 [queued]>
+[2023-06-25T02:22:05.862+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag.choose_best_model scheduled__2023-06-24T00:00:00+00:00 [queued]>
+[2023-06-25T02:22:05.864+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-25T02:22:06.002+0000] {taskinstance.py:1327} INFO - Executing <Task(BranchPythonOperator): choose_best_model> on 2023-06-24 00:00:00+00:00
+[2023-06-25T02:22:06.033+0000] {standard_task_runner.py:57} INFO - Started process 563 to run task
+[2023-06-25T02:22:06.082+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'my_dag', 'choose_best_model', 'scheduled__2023-06-24T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/my_dag.py', '--cfg-path', '/tmp/tmpxqhz7_5c']
+[2023-06-25T02:22:06.121+0000] {standard_task_runner.py:85} INFO - Job 9: Subtask choose_best_model
+[2023-06-25T02:22:06.553+0000] {task_command.py:410} INFO - Running <TaskInstance: my_dag.choose_best_model scheduled__2023-06-24T00:00:00+00:00 [running]> on host 8b092f32fb5b
+[2023-06-25T02:22:07.277+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag' AIRFLOW_CTX_TASK_ID='choose_best_model' AIRFLOW_CTX_EXECUTION_DATE='2023-06-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-06-24T00:00:00+00:00'
+[2023-06-25T02:22:07.360+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 215, in execute
+    branch = super().execute(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/my_dag.py", line 17, in _choose_best_model
+    if (best_accuracy > 8):
+NameError: name 'best_accuracy' is not defined
+[2023-06-25T02:22:07.416+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=my_dag, task_id=choose_best_model, execution_date=20230624T000000, start_date=20230625T022205, end_date=20230625T022207
+[2023-06-25T02:22:07.537+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 9 for task choose_best_model (name 'best_accuracy' is not defined; 563)
+[2023-06-25T02:22:07.975+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-25T02:22:08.197+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,90 @@
+[2023-06-29T16:25:27.883+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: search_posts.get_posts scheduled__2023-06-28T00:00:00+00:00 [queued]>
+[2023-06-29T16:25:27.918+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: search_posts.get_posts scheduled__2023-06-28T00:00:00+00:00 [queued]>
+[2023-06-29T16:25:27.920+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-06-29T16:25:27.986+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): get_posts> on 2023-06-28 00:00:00+00:00
+[2023-06-29T16:25:28.006+0000] {standard_task_runner.py:57} INFO - Started process 332 to run task
+[2023-06-29T16:25:28.035+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'search_posts', 'get_posts', 'scheduled__2023-06-28T00:00:00+00:00', '--job-id', '115', '--raw', '--subdir', 'DAGS_FOLDER/search_posts.py', '--cfg-path', '/tmp/tmpb_xym49n']
+[2023-06-29T16:25:28.041+0000] {standard_task_runner.py:85} INFO - Job 115: Subtask get_posts
+[2023-06-29T16:25:28.259+0000] {task_command.py:410} INFO - Running <TaskInstance: search_posts.get_posts scheduled__2023-06-28T00:00:00+00:00 [running]> on host 414be138234a
+[2023-06-29T16:25:28.505+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='search_posts' AIRFLOW_CTX_TASK_ID='get_posts' AIRFLOW_CTX_EXECUTION_DATE='2023-06-28T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-06-28T00:00:00+00:00'
+[2023-06-29T16:25:30.213+0000] {logging_mixin.py:149} INFO - <Response [200]>
+[2023-06-29T16:25:30.223+0000] {logging_mixin.py:149} INFO - searching alcohol...
+[2023-06-29T16:25:38.300+0000] {logging_mixin.py:149} INFO - searching drinks...
+[2023-06-29T16:25:48.819+0000] {logging_mixin.py:149} INFO - searching cocktails...
+[2023-06-29T16:25:57.362+0000] {logging_mixin.py:149} INFO - searching beer...
+[2023-06-29T16:26:05.770+0000] {logging_mixin.py:149} INFO - searching wine...
+[2023-06-29T16:26:14.108+0000] {logging_mixin.py:149} INFO - searching liquor...
+[2023-06-29T16:26:22.953+0000] {logging_mixin.py:149} INFO - searching spirits...
+[2023-06-29T16:26:30.145+0000] {logging_mixin.py:149} INFO - searching happyhour...
+[2023-06-29T16:26:34.504+0000] {logging_mixin.py:149} INFO - searching mixology...
+[2023-06-29T16:26:42.264+0000] {logging_mixin.py:149} INFO - searching bartender...
+[2023-06-29T16:26:49.231+0000] {logging_mixin.py:149} INFO - searching craftbeer...
+[2023-06-29T16:26:55.104+0000] {logging_mixin.py:149} INFO - searching winelover...
+[2023-06-29T16:27:02.241+0000] {logging_mixin.py:149} INFO - searching drinkstagram...
+[2023-06-29T16:27:03.453+0000] {logging_mixin.py:149} INFO - searching whiskey...
+[2023-06-29T16:27:10.847+0000] {logging_mixin.py:149} INFO - searching vodka...
+[2023-06-29T16:27:17.571+0000] {logging_mixin.py:149} INFO - searching gin...
+[2023-06-29T16:27:24.979+0000] {logging_mixin.py:149} INFO - searching rum...
+[2023-06-29T16:27:34.392+0000] {logging_mixin.py:149} INFO - searching tequila...
+[2023-06-29T16:28:49.400+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 721, in urlopen
+    chunked=chunked,
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 403, in _make_request
+    self._validate_conn(conn)
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1053, in _validate_conn
+    conn.connect()
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7f319021a890>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/adapters.py", line 497, in send
+    chunked=chunked,
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Max retries exceeded with url: /search/?q=tequila&include_over_18=1&type=comment&limit=100 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f319021a890>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/search_posts.py", line 33, in get_posts
+    results_df = reddit.post_search(search_term)
+  File "/opt/airflow/dags/lib/reddit_api.py", line 156, in post_search
+    headers=self.headers)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Max retries exceeded with url: /search/?q=tequila&include_over_18=1&type=comment&limit=100 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f319021a890>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2023-06-29T16:28:49.446+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=search_posts, task_id=get_posts, execution_date=20230628T000000, start_date=20230629T162527, end_date=20230629T162849
+[2023-06-29T16:28:49.476+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 115 for task get_posts (HTTPSConnectionPool(host='oauth.reddit.com', port=443): Max retries exceeded with url: /search/?q=tequila&include_over_18=1&type=comment&limit=100 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f319021a890>: Failed to establish a new connection: [Errno 111] Connection refused')); 332)
+[2023-06-29T16:28:49.572+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-06-29T16:28:49.627+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check
