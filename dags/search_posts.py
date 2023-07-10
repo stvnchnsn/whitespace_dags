@@ -26,6 +26,7 @@ SEARCH_TERMS = {
 
 def get_posts():
     reddit = Reddit_API()
+    print(os.listdir())
     reddit.connect_reddit(pickle_name = './plugins/monkey')
     raw_reddit_posts = pd.DataFrame()
     for topic, search_terms in SEARCH_TERMS.items():
