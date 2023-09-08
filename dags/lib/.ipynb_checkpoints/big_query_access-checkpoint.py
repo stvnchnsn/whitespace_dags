@@ -5,13 +5,8 @@ import os
 
 from lib.bucket_access import get_blob
 
-#CREDIENTIALS_PATH = './plugins/oceanic-variety-386313-5611c0e63164.json'
-#PROJECT_ID = 'oceanic-variety-386313'
-
-'./plugins/trusty-sentinel-283421-f11675d112ea.json'
-
-CREDIENTIALS_PATH = './plugins/trusty-sentinel-283421-f11675d112ea.json'
-PROJECT_ID = 'trusty-sentinel-283421'
+CREDIENTIALS_PATH = './plugins/oceanic-variety-386313-5611c0e63164.json'
+PROJECT_ID = 'oceanic-variety-386313'
 
 CONFIG = {
     'bucket_name':"us-central1-reddit-scrappin-5a19086f-bucket",
@@ -19,22 +14,22 @@ CONFIG = {
 
 }
 
-def get_big_query(query, credientials_path = CREDIENTIALS_PATH, project_id = PROJECT_ID):
+def get_big_query(query, credientials_path = './plugins/oceanic-variety-386313-5611c0e63164.json', project_id = 'oceanic-variety-386313'):
     
-    to_fp = CREDIENTIALS_PATH
-    #get_blob(CONFIG['bucket_name'], CONFIG['bg_api_fp'], to_fp)
+    to_fp = './oceanic-variety-386313-5611c0e63164.json'
+    get_blob(CONFIG['bucket_name'], CONFIG['bg_api_fp'], to_fp)
     credentials = service_account.Credentials.from_service_account_file(to_fp)
     client = bigquery.Client(credentials= credentials,project=project_id)
     print(f'executing BigQuery: {query}')
     query_job = client.query(query)
     results = query_job.result()
     return results.to_dataframe()
-def update_bq_from_df(dataframe, table_name,credientials_path = CREDIENTIALS_PATH, project_id = PROJECT_ID):
+def update_bq_from_df(dataframe, table_name,credientials_path = './plugins/oceanic-variety-386313-5611c0e63164.json', project_id = 'oceanic-variety-386313'):
     ''''
     
     '''
-    to_fp = credientials_path
-    #get_blob(CONFIG['bucket_name'], CONFIG['bg_api_fp'], to_fp)
+    to_fp = './oceanic-variety-386313-5611c0e63164.json'
+    get_blob(CONFIG['bucket_name'], CONFIG['bg_api_fp'], to_fp)
     credentials = service_account.Credentials.from_service_account_file(to_fp)
     client = bigquery.Client(credentials= credentials, project=project_id)
     

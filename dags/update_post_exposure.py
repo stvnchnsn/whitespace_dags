@@ -23,12 +23,12 @@ def get_exposure_information():
 
 
 
-with DAG("update_post_exposure", start_date = datetime(2021,1,1),
-                schedule_interval="@daily", catchup=False) as dag:
+# with DAG("update_post_exposure", start_date = datetime(2021,1,1),
+#                 schedule_interval="@daily", catchup=False) as dag:
 
-                get_post_ids = PythonOperator(
-                    task_id = 'get_post_ids',
-                    python_callable = get_post_ids
-                )
-                get_post_ids
+#                 get_post_ids = PythonOperator(
+#                     task_id = 'get_post_ids',
+#                     python_callable = get_post_ids
+#                 )
+#                 get_post_ids
 

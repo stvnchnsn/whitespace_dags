@@ -11,6 +11,8 @@ from airflow.operators.bash  import BashOperator
 
 from lib.big_query_access import get_big_query, update_bq_from_df
 from lib.reddit_api import Reddit_API
+#from lib.bucket_access import get_blob
+
 
 # replace SEARCH_TERMS dictionary with table
 SEARCH_TERMS = {
@@ -19,6 +21,23 @@ SEARCH_TERMS = {
     "happyhour","mixology","bartender","craftbeer","winelover","drinkstagram",
     "whiskey","vodka","gin","rum","tequila","drinking","drinkresponsibly"]
 }
+
+SEARCH_TERMS = {
+    'us_election_2024':
+    ["biden","biden2024","Joe Biden", 
+     "trump","trump2024","Donald J. Trump",
+     "Gov. Ron Desantis", "DeSantis", "Florida",
+     "Glenn Younkin","Doug Burgum", "Chris Christie", "Nikki Haley",
+     "Asa Hutchinson", "Mike Pence", "Vivek Ramaswamy", "Tim Scott"
+     ]
+}
+
+CONFIG = {
+    'bucket_name':"us-central1-reddit-scrappin-5a19086f-bucket",
+    'reddit_api_fp':"dags/search_posts/plugins/monkey.pkl"
+
+}
+
 # SEARCH_TERMS = {
 #     'test':
 #     ["tests"]
@@ -26,13 +45,21 @@ SEARCH_TERMS = {
 
 def get_posts():
     reddit = Reddit_API()
+
+    #to_fp='./lib/monkey.pkl'
+    pickle_name = './plugins/monkey'
+    #get_blob(CONFIG['bucket_name'], CONFIG['reddit_api_fp'], to_fp)
     print(os.listdir())
-    reddit.connect_reddit(pickle_name = './plugins/monkey')
+
+
+    reddit.connect_reddit(pickle_name = pickle_name)
     raw_reddit_posts = pd.DataFrame()
     for topic, search_terms in SEARCH_TERMS.items():
         for search_term in search_terms:
             print(f'searching {search_term}...')
             results_df = reddit.post_search(search_term)
+            if results_df.empty:
+                 continue
             results_df['search_term'] = search_term
             results_df['topic'] = topic
             raw_reddit_posts = pd.concat([raw_reddit_posts, results_df])
@@ -73,19 +100,30 @@ def update_db(ti):
     raw_reddit_pulls = update_data[raw_reddit_cols]
     table_name = 'reddit_db.raw_reddit_pulls'
     raw_reddit_pulls['created'] = pd.to_datetime(raw_reddit_pulls['created']).dt.strftime("%Y-%m-%d %H:%M:%S")
+    
+    for col in raw_reddit_pulls.columns:
+         raw_reddit_pulls[col] = raw_reddit_pulls[col].astype(str)
 
-    values = str([tuple(value) for value in raw_reddit_pulls.values]).replace('[','').replace(']','')
-    query = f"""
-        INSERT INTO {table_name} {str(tuple(raw_reddit_pulls.columns)).replace("'","")}
-        VALUES {values}
-        """
-    _ = get_big_query(query)
+    n = 100
+ 
+    #split DataFrame into chunks
+    list_df = [raw_reddit_pulls[i:i+n] for i in range(0,len(raw_reddit_pulls),n)]
+    for df in list_df:
+        values = str([tuple(value) for value in df.values]).replace('[','').replace(']','')
+        query = f"""
+            INSERT INTO {table_name} {str(tuple(df.columns)).replace("'","")}
+            VALUES {values}
+            """
+        _ = get_big_query(query)
 
     # update post_exposure
     table_name = 'reddit_db.post_exposure'
     post_exposure_cols = ['id','num_comments','ups','upvote_ratio']
     post_exposures = fresh_data[post_exposure_cols]
     post_exposures['measurement_date'] = int(dt.datetime.now().strftime("%Y%m%d%H%M"))
+
+    for col in post_exposures.columns:
+         post_exposures[col] = post_exposures[col].astype(str)
 
     # TODO: query is too 'complex or long'. try breaking it up into chunks
     for i in range(len(post_exposures)):
@@ -107,6 +145,10 @@ def update_db(ti):
     table_name= 'reddit_db.post_search_terms'
     post_search_terms=cols = ['id','search_term']
     post_search_terms = fresh_data[post_search_terms]
+
+    for col in post_search_terms.columns:
+         post_search_terms[col] = post_search_terms[col].astype(str)
+
     for i in range(len(post_search_terms)):
         start_i = i*500
         if start_i > len(post_search_terms)-1:
@@ -129,6 +171,9 @@ def update_db(ti):
     topic_search_terms_cols = ['id','topic']
     topic_search_terms = fresh_data[topic_search_terms_cols]
 
+    for col in topic_search_terms.columns:
+         topic_search_terms[col] = topic_search_terms[col].astype(str)
+
     for i in range(len(topic_search_terms)):
         start_i = i*500
         if start_i > len(topic_search_terms)-1:
@@ -150,7 +195,7 @@ def update_db(ti):
 
 
 
-with DAG("search_posts", start_date = datetime(2021,1,1),
+with DAG("search_posts_3", start_date = datetime(2021,1,1),
                 schedule_interval="@daily", catchup=False) as dag:
 
                 get_posts = PythonOperator(

@@ -150,7 +150,17 @@ class Reddit_API(API_Connector):
                 try: 
                     params = {'limit':100, 'after':list(new_df.name)[-1]}
                 except AttributeError: # new_df is empty which probably means their is no more data
-                    return pd.concat(list_of_dfs)[cols]
+                    if (len(list_of_dfs)==0):
+                        print(f"No posts found for search_term: {search_term}")
+                        # return empty data frame
+                        return pd.DataFrame()
+                    try:
+                        return pd.concat(list_of_dfs)[cols]
+                    except KeyError:
+                        print(f"KeyError - likely because no data was found during search of search_term: {search_term}")
+                        return pd.DataFrame() 
+
+                
             res = requests.get(f"https://oauth.reddit.com/search/?q={search_term}&include_over_18=1&type=comment",
                     params = params,
                         headers=self.headers)
